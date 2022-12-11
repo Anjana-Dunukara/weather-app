@@ -8,19 +8,19 @@ const forecast = (latitude, longtitude, callback) => {
     encodeURIComponent(latitude) +
     "";
 
-  request({ url: url, json: true }, (error, response) => {
+  request({ url, json: true }, (error, { body }) => {
     if (error) {
       callback("Unable to connect to weather Stack API", undefined);
-    } else if (response.body.error) {
+    } else if (body.error) {
       callback("Unable to find location your seraching");
     } else {
       callback(
         undefined,
-        response.body.current.weather_descriptions[0] +
+        body.current.weather_descriptions[0] +
           ". It is curruntly " +
-          response.body.current.temperature +
+          body.current.temperature +
           " degrees out. It feels like " +
-          response.body.current.feelslike +
+          body.current.feelslike +
           " degrees out."
       );
     }
