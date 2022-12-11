@@ -1,21 +1,26 @@
-const request = require("request");
 const geocode = require("./utils/geocode");
 const forecast = require("./utils/forecast");
 
-geocode("Boston", (error, geocodedata) => {
-  if (error) {
-    return console.log("Error: ", error);
-  }
-  forecast(
-    geocodedata.latitude,
-    geocodedata.longtitude,
-    (error, forecastdata) => {
-      if (error) {
-        return console.log("Error: ", error);
-      }
+const location = process.argv[2];
 
-      console.log(geocodedata.location);
-      console.log(forecastdata);
+if (location) {
+  geocode(location, (error, geocodedata) => {
+    if (error) {
+      return console.log("Error: ", error);
     }
-  );
-});
+    forecast(
+      geocodedata.latitude,
+      geocodedata.longtitude,
+      (error, forecastdata) => {
+        if (error) {
+          return console.log("Error: ", error);
+        }
+
+        console.log(geocodedata.location);
+        console.log(forecastdata);
+      }
+    );
+  });
+} else {
+  console.log("Please Enter the location you want to check the weather");
+}
