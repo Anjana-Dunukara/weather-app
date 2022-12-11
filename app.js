@@ -1,5 +1,6 @@
 const request = require("request");
 const geocode = require("./utils/geocode");
+const forecast = require("./utils/forecast");
 
 // const url =
 //   "http://api.weatherstack.com/current?access_key=fe42a58169837ab002c0615d7698f253&query=37.8267,-122.4233&units=f";
@@ -21,30 +22,12 @@ const geocode = require("./utils/geocode");
 //   }
 // });
 
-// const urlgeo =
-//   "https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Angeles.json?access_token=pk.eyJ1IjoiZHVudTk3IiwiYSI6ImNsYmdsNnZlajBoNzMzcHBkOWtxc20xZDMifQ.-X2t0qoTnKLm_apQ-R3jQw&limit=1";
-
-// request({ url: urlgeo, json: true }, (error, response) => {
-//   //   console.log(response);
-
-//   if (error) {
-//     console.log("Unable to connect to mapbox API");
-//   } else if (!response.body.features[0]) {
-//     console.log("Unable to find location you searched");
-//   } else {
-//     const geodata = response.body.features[0];
-
-//     console.log(
-//       "Your latitude: " +
-//         geodata.center[1] +
-//         " Your longitude: " +
-//         geodata.center[0] +
-//         ""
-//     );
-//   }
-// });
-
 geocode("Boston", (error, data) => {
   console.log("Error: ", error);
   console.log("Data: ", data);
+});
+
+forecast(-75.7088, 44.1545, (error, data) => {
+  console.log("Error", error);
+  console.log("Data", data);
 });
